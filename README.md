@@ -1,62 +1,95 @@
-# gtop
+# mytop
 
-![screen record](https://raw.githubusercontent.com/aksakalli/gtop/master/img/demo.gif)
+System monitoring dashboard for terminal written in Rust.
 
-System monitoring dashboard for terminal.
+## Features
 
-  [![NPM Version](https://img.shields.io/npm/v/gtop.svg)](https://npmjs.org/package/gtop)
-  [![NPM Downloads](https://img.shields.io/npm/dm/gtop.svg)](https://npmjs.org/package/gtop)
-  [![Snap Status](https://snapcraft.io/gtop/badge.svg)](https://snapcraft.io/gtop)
-  [![Docker Pulls](https://img.shields.io/docker/pulls/aksakalli/gtop)](https://hub.docker.com/r/aksakalli/gtop)
-  [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/aksakalli/gtop)](https://hub.docker.com/r/aksakalli/gtop/builds)
+- **Real-time CPU monitoring**: Track CPU usage for all cores with historical graphs
+- **Memory & Swap monitoring**: Visual gauges and historical charts
+- **Network statistics**: Real-time network transfer rates and totals
+- **Disk usage**: Monitor disk space usage
+- **Process management**: View and sort running processes by PID, CPU, or Memory
 
-### Requirements
+## Requirements
 
-* Linux / OSX / Windows (partial support)
-* Node.js >= v8
+- Linux / macOS / Windows
+- Rust 1.70 or higher (for building from source)
 
-### Installation
+## Installation
 
-```sh
-$ npm install gtop -g
+### From Source
+
+```bash
+git clone <your-repo>
+cd mytop
+source "$HOME/.cargo/env"
+cargo build --release
+sudo cp target/release/mytop /usr/local/bin/
 ```
 
-#### Docker
+### Using Cargo
 
-You need to assign host `net` and `pid` to access the metrics in the host machine.
-
-```sh
-$ docker run --rm -it \
-    --name gtop \
-    --net="host" \
-    --pid="host" \
-    aksakalli/gtop
+```bash
+cargo install --path .
 ```
 
-### Usage
+## Usage
 
-Start gtop with the `gtop` command
+Start mytop with the `mytop` command:
 
-```sh
-$ gtop
+```bash
+mytop
 ```
 
-To stop gtop use `q`, or `ctrl+c` in most shell environments.
+### Keyboard Shortcuts
 
-You can sort the process table by pressing
+- `q` or `Esc` or `Ctrl+C`: Quit the application
+- `p`: Sort processes by PID
+- `c`: Sort processes by CPU usage
+- `m`: Sort processes by Memory usage
 
-* `p`: Process Id
-* `c`: CPU usage
-* `m`: Memory usage
+## Architecture
 
-### Troubleshooting
+The project is organized into several modules:
 
-If you see question marks or other different characters, try to run it with these environment variables:
+- **monitor/**: System information collection modules
+  - `cpu.rs`: CPU usage monitoring
+  - `memory.rs`: Memory and swap monitoring
+  - `network.rs`: Network statistics
+  - `disk.rs`: Disk usage monitoring
+  - `process.rs`: Process information and sorting
+- **ui.rs**: Terminal user interface using ratatui
+- **utils.rs**: Utility functions (byte formatting, colors)
+- **main.rs**: Application entry point and main loop
 
-```sh
-$ LANG=en_US.utf8 TERM=xterm-256color gtop
+## Dependencies
+
+- [ratatui](https://github.com/ratatui-org/ratatui): Terminal UI library
+- [crossterm](https://github.com/crossterm-rs/crossterm): Cross-platform terminal manipulation
+- [sysinfo](https://github.com/GuillaumeGomez/sysinfo): System information library
+- [tokio](https://tokio.rs/): Async runtime
+- [anyhow](https://github.com/dtolnay/anyhow): Error handling
+
+## Building
+
+```bash
+cargo build --release
+```
+
+## Testing
+
+```bash
+cargo test
 ```
 
 ## License
 
-Released under [the MIT license](LICENSE).
+MIT License - see LICENSE file for details
+
+## Original Project
+
+This is a Rust reimplementation of [gtop](https://github.com/aksakalli/gtop) originally written in Node.js.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
