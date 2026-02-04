@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1770236467728,
+  "lastUpdate": 1770236822713,
   "repoUrl": "https://github.com/npequeux/rtop",
   "entries": {
     "Performance Metrics": [
@@ -33,6 +33,40 @@ window.BENCHMARK_DATA = {
           {
             "name": "Build Time",
             "value": 55.21,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "npequeux@users.noreply.github.com",
+            "name": "Nicolas Pequeux",
+            "username": "npequeux"
+          },
+          "committer": {
+            "email": "npequeux@users.noreply.github.com",
+            "name": "Nicolas Pequeux",
+            "username": "npequeux"
+          },
+          "distinct": true,
+          "id": "90414c91773873000dd55586e52594bfd40a4434",
+          "message": "perf: Optimize Docker workflow for faster builds\n\nSpeed improvements:\n- Skip Docker builds on docs-only changes (paths-ignore)\n- Build only amd64 on PRs (multi-arch only on master/tags) - saves 50% time\n- Add BUILDKIT_INLINE_CACHE for better layer reuse\n- Fix Dockerfile fingerprint cleanup for better caching\n\nEstimated time: 8-10 min → 3-4 min (PR), 6-8 min (master)",
+          "timestamp": "2026-02-04T21:25:40+01:00",
+          "tree_id": "b6d21bf020af25f9a0720b0bc7d22281ae194670",
+          "url": "https://github.com/npequeux/rtop/commit/90414c91773873000dd55586e52594bfd40a4434"
+        },
+        "date": 1770236822314,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Binary Size (bytes)",
+            "value": 3409752,
+            "unit": "bytes"
+          },
+          {
+            "name": "Build Time",
+            "value": 0,
             "unit": "seconds"
           }
         ]
